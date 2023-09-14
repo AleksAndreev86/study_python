@@ -8,17 +8,27 @@ print('Программа - телефонный справочник с зап�
 
 command = ['+', '-', '1', '9', '0']
 
+def input_record():
+    family = input('Введите фамилию абонента: ').strip().title()
+    name = input('Введите имя абонента: ').strip().title()
+    patronymic = input('Введите отчество абонента: ').strip().title()
+    phone_number = input('Введите номер телефона в формате "ххх-ххх-хххх": ').strip()
+    return f'{family} {name} {patronymic} - {phone_number}\n'
+
 def add_record():
-    family = input('Введите фамилию абонента: ')
-    name = input('Введите имя абонента: ')
-    patronymic = input('Введите отчество абонента: ')
-    phone_number = input('Введите номер телефона в формате "ххх-ххх-хххх": ')
     with open('phone_number.txt', 'a', encoding='UTF-8') as file:
-        file.write(f'{family} {name} {patronymic} - {phone_number}\n')
+        file.write(input_record())
     return print('Запись добавлена!')
 
 def remove_record():
-    pass
+    with open('phone_number.txt', 'r', encoding='UTF-8') as file:
+        data = file.readlines()
+    print('Введите данные для удаления записи:')
+    line = input_record()
+    if line in data:
+        with open('phone_number.txt', 'r+', encoding='UTF-8') as file:
+            file.replace(line, '')
+    return print('Запись удалена!')
 
 def update_record():
     pass
