@@ -22,13 +22,15 @@ def add_record():
 
 def remove_record():
     with open('phone_number.txt', 'r', encoding='UTF-8') as file:
-        data = file.readlines()
+        lines = file.readlines()
     print('Введите данные для удаления записи:')
-    line = input_record()
-    if line in data:
-        with open('phone_number.txt', 'r+', encoding='UTF-8') as file:
-            file.replace(line, '')
-    return print('Запись удалена!')
+    data = input_record()
+    if data in lines:
+        with open('phone_number.txt', 'w', encoding='UTF-8') as file:
+            for line in lines:
+                if line != data: file.write(line)
+            return print('Запись удалена!')
+    else: print('Введенных Вами данных не существует.')
 
 def update_record():
     pass
