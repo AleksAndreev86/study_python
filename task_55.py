@@ -50,7 +50,8 @@ def update_record():
     else: print('Введенных Вами данных не существует.')
 
 def print_all_record():
-    pass
+    print(*([''] + write_file()))
+    
 
 def print_if_record():
     pass
