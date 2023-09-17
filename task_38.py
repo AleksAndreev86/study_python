@@ -54,7 +54,7 @@ def print_all_record():
     
 
 def print_if_record():
-    value = input('Введите значение фильтра (например, Илья): ').strip().title()
+    value = input('Введите значение фильтра (например, Илья): ').strip()
     lines = read_file(); print()
     for line in lines:
         if value in line: print(line, end='')
