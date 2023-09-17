@@ -15,14 +15,17 @@ def input_record():
     phone_number = input('Введите номер телефона в формате "ххх-ххх-хххх": ').strip()
     return f'{family} {name} {patronymic} - {phone_number}\n'
 
+def write_file():
+    with open('phone_number.txt', 'r', encoding='UTF-8') as file:
+        return file.readlines()
+
 def add_record():
     with open('phone_number.txt', 'a', encoding='UTF-8') as file:
         file.write(input_record())
     return print('Запись добавлена!')
 
 def remove_record():
-    with open('phone_number.txt', 'r', encoding='UTF-8') as file:
-        lines = file.readlines()
+    lines = write_file()
     print('Введите данные для удаления записи:')
     data = input_record()
     if data in lines:
@@ -33,7 +36,18 @@ def remove_record():
     else: print('Введенных Вами данных не существует.')
 
 def update_record():
-    pass
+    lines, lines_new = write_file(), []
+    print('Введите данные записи, которую хотите отредактировать:'); data = input_record()
+    print('Введите новые данные записи:'); replace_data = input_record()
+    if data in lines:
+        for line in lines:
+            if line != data: lines_new.append(line)
+            else: lines_new.append(line.replace(data, replace_data))
+        with open('phone_number.txt', 'w', encoding='UTF-8') as file:
+            for line_new in lines_new:
+                file.write(line_new)
+        return print('Запись изменена!')
+    else: print('Введенных Вами данных не существует.')
 
 def print_all_record():
     pass
